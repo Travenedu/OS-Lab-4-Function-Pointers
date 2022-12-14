@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<errno.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
 
 #include "process.h"
 #include "util.h"
@@ -23,8 +23,7 @@ typedef int (*Comparer) (const void *a, const void *b);
  * - Process ids will be unique
  * - No 2 processes will have same arrival time
  */
-int my_comparer(const void *this, const void *that)
-{
+int my_comparer(const void *this, const void *that){
 	Process process1 = *(Process *)this;
   Process process2 = *(Process *)that;
 
@@ -36,18 +35,17 @@ int my_comparer(const void *this, const void *that)
   } else {
     if ((process1.arrival_time) < (process2.arrival_time)) {
       return -1;
-    } 
+      } 
+    
     else if ((process2.arrival_time) < (process1.arrival_time)){
       return 1;
     }
 
-  }
 	return 0;
 }
+}
 
-int main(int argc, char *argv[])
-{
-
+int main(int argc, char *argv[]){
 	if (argc < 2) {
 		   fprintf(stderr, "Usage: ./func-ptr <input-file-path>\n");
 		   fflush(stdout);
@@ -72,10 +70,11 @@ int main(int argc, char *argv[])
 	Comparer process_comparer = &my_comparer;
 
 #if DEBUG
-	for (int i = 0; i < P_SIZE; i++) {
-		    printf("%d (%d, %d) ",
-				processes[i].pid,
-				processes[i].priority, processes[i].arrival_time);
+  //int i;
+	for(int i = 0; i < P_SIZE; i++){
+		    printf("%d (%d, %d) ", 
+        processes[i].pid, processes[i].priority,
+        processes[i].arrival_time);
 	}
 	printf("\n");
 #endif
@@ -85,8 +84,8 @@ int main(int argc, char *argv[])
 	/**************************/
 	/* print the sorted data  */
 	/**************************/
-
-	for (int i = 0; i < P_SIZE; i++) {
+  //int i;
+	for(int i = 0; i < P_SIZE; i++) {
 		    printf("%d (%d, %d)\n",
 				processes[i].pid,
 				processes[i].priority, processes[i].arrival_time);
